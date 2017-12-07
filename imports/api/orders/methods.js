@@ -25,7 +25,6 @@ export const getLastOrder = () => {
     );
   }
 };
-
 /**
  * Get an order by id
  *
@@ -42,8 +41,6 @@ export const getOrderById = orderId => {
     );
   }
 };
-
-
 // Register meteor methods.
 Meteor.methods({
   "orders.getLastOrder": getLastOrder,
