@@ -13,4 +13,8 @@ Meteor.startup(() => {
       })
     );
   }
+
+  if(Orders.find().count()===0){
+    Orders.insert({"name":"hello"})
+  }
 });

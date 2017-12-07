@@ -3,11 +3,39 @@ import React, { PureComponent } from "react";
 
 // Components
 import Button from "../components/Button.jsx";
+import {Orders} from "../../api/orders/collection.js"
 
 class Product extends PureComponent {
+  constructor(props){
+    super(props);
+    this.state={
+      user:"",
+      name: this.props.name,
+      price: this.props.price,
+      description: this.props.description,
+      color: this.props.color,
+      size: this.props.size,
+      brand: this.props.brand,
+      quantity: ""
+    }
+
+
+  }
+
   handleBuyProduct = () => {
+    Orders.insert(this.state); 
+    
     alert("This button does nothing!");
+    
   };
+
+  handleChange = (e)=>{
+    const value = e.target.value;
+    console.log(value)
+    this.setState({
+      quantity: value
+    })
+  }
 
   render() {
     const {
@@ -28,6 +56,7 @@ class Product extends PureComponent {
       { label: "Size", value: size },
       { label: "Price", value: price }
     ];
+    // console.log(this.props)
 
     return (
       <div className="product">
@@ -45,10 +74,23 @@ class Product extends PureComponent {
               </div>
             )}
           </div>
+          <form>
+            <label> Quantity: </label>
+          <input  type = "number" 
+                  name="quantity" 
+                  
+                  min='1' 
+                  max={this.props.quantity} 
+                  step='1'
+                  onChange={this.handleChange} 
+                  />
+          </form>
           <Button onClick={this.handleBuyProduct}>
             Buy {name}
           </Button>
+          
         </div>
+        
       </div>
     );
   }

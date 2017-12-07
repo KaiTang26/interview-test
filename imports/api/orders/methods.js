@@ -14,7 +14,7 @@ import { Orders } from "./collection";
 export const getLastOrder = () => {
   const options = { sort: { createdAt: -1 }, limit: 1 };
   try {
-    const lastOrderCursor = Products.find({}, options);
+    const lastOrderCursor = Orders.find({}, options);
     const lastOrder = lastOrderCursor.fetch()[0];
     return lastOrder;
   } catch (error) {
@@ -33,7 +33,7 @@ export const getLastOrder = () => {
  */
 export const getOrderById = orderId => {
   try {
-    return Products.findOne(orderId);
+    return Orders.findOne(orderId);
   } catch (error) {
     throw new Meteor.Error(
       `${__filename}:getOrderById.findOrFetchError`,
@@ -42,6 +42,7 @@ export const getOrderById = orderId => {
     );
   }
 };
+
 
 // Register meteor methods.
 Meteor.methods({
