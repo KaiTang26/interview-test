@@ -3,13 +3,15 @@ import React, { PureComponent } from "react";
 
 // Components
 import Button from "../components/Button.jsx";
-import {Orders} from "../../api/orders/collection.js"
+import {Orders} from "../../api/orders/collection.js";
+import { Meteor } from 'meteor/meteor';
 
 class Product extends PureComponent {
   constructor(props){
     super(props);
     this.state={
-      user:"",
+      userId: Meteor.userId(),
+      userName: Meteor.user().username,
       name: this.props.name,
       price: this.props.price,
       description: this.props.description,
@@ -23,10 +25,16 @@ class Product extends PureComponent {
   }
 
   handleBuyProduct = () => {
-    Orders.insert(this.state); 
-    
-    alert("This button does nothing!");
-    
+    if(!localStorage.getItem('Meteor.userId')){
+      alert('Please login')
+    }else if(!this.state.quantity){
+      alert('Please buy something')
+    }else{
+      Orders.insert(this.state); 
+      alert("This button does nothing!");
+    }
+
+    console.log(Orders.find({"userId":Meteor.userId()}).fetch())
   };
 
   handleChange = (e)=>{

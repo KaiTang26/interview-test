@@ -5,6 +5,7 @@ import { render } from "react-dom";
 
 // Libraries
 import "bootstrap/dist/css/bootstrap.css";
+import '../accounts-config.js';
 
 // Client Imports
 import Routes from "../../ui/Routes.jsx";
